@@ -21,7 +21,7 @@ int main()
         {1, 0, 1},
         {0, 1, 0}};
     g1.loadGraph(graph); // Load the graph to the object.
-
+    cout<<g1.printGraph(); // Should print the matrix of the graph: [0, 1, 0], [1, 0, 1], [0, 1, 0]
     cout<<g1; // Should print the matrix of the graph: [0, 1, 0], [1, 0, 1], [0, 1, 0]
 
     // 3x3 matrix that represents a weighted connected graph.

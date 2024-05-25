@@ -23,37 +23,41 @@ namespace ariel {
 
         }
         void loadGraph(std::vector<std::vector<int>> graph);
-        void printGraph();
+        string printGraph();
         size_t getN();
         std::vector<std::vector<int>> getGraph();
         int getgraphtype(){
             return this->graphtype;
         }
-        friend Graph operator+( Graph& cur, Graph& other);
-        friend void operator+=( Graph& cur, Graph& other);
-        friend Graph operator+( Graph& cur);
-        friend void operator++( Graph& cur);
-        friend Graph operator-( Graph& cur);
-        friend void operator-=( Graph& cur, Graph& other);
-        friend Graph operator-( Graph& cur, Graph& other);
-        friend void operator--( Graph& cur);
-        friend Graph operator*( Graph& cur, Graph& other);
-        friend void operator*=( Graph& cur, Graph& other);
-        friend void operator*=( Graph& cur,int n);
-        friend Graph operator*( Graph& cur,int n);
-        friend bool operator==( Graph& cur, Graph& other);
-        friend bool operator!=( Graph& cur, Graph& other);
-        friend bool operator>( Graph& cur, Graph& other);
-        friend bool operator<( Graph& cur, Graph& other);
-        friend bool operator>=( Graph& cur, Graph& other);
-        friend bool operator<=( Graph& cur, Graph& other);
-        friend ostream& operator<<(ostream& os,  Graph& g);
-        friend void operator/= ( Graph& cur,int n);
+        Graph operator+( Graph& other);
+        Graph& operator+=( Graph& other);
+        Graph operator+();
+        Graph& operator++();
+        Graph operator-();
+        Graph& operator-=( Graph& other);
+        Graph operator-(  Graph& other);
+        Graph& operator--( );
+        Graph operator*( Graph& other);
+        Graph& operator*=( Graph& other);
+        Graph& operator*=(int n);
+        friend Graph operator*( int n, Graph& other);
+        friend Graph operator*( Graph& other, int n); //both cases
+         bool operator==(  Graph& other);
+         bool operator!=(  Graph& other);
+         bool operator>(  Graph& other);
+         bool operator<(  Graph& other);
+         bool operator>=(  Graph& other);
+         bool operator<=(  Graph& other);
+         friend ostream& operator<<(ostream& os,  Graph& g);
+         Graph& operator/= (int n);
+
+
 
 
         
 
     };
+    int gComperator(Graph& g1, Graph& g2);
 }
 
 #endif
