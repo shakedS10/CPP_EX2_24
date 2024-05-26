@@ -55,6 +55,7 @@ namespace ariel{
                 s += "]";
                 s += '\n';
             }
+            cout << s;
             return s;
         }
 
@@ -71,7 +72,7 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG = this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -89,7 +90,7 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -110,7 +111,7 @@ namespace ariel{
         }
 
         Graph& Graph::operator++(){
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -124,7 +125,7 @@ namespace ariel{
         }
 
         Graph Graph::operator-(){
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -142,7 +143,7 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -159,7 +160,7 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -174,7 +175,7 @@ namespace ariel{
         }
 
         Graph& Graph::operator--(){
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -191,7 +192,8 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            size_t n = this->getN();
+            std::vector<std::vector<int>> nG(n, std::vector<int>(n, 0));
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -211,7 +213,8 @@ namespace ariel{
             if(this->getN() != other.getN()){
                 throw std::invalid_argument("Invalid graph size");
             }
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            size_t n = this->getN();
+            std::vector<std::vector<int>> nG(n, std::vector<int>(n, 0));
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -227,7 +230,7 @@ namespace ariel{
         }
 
         Graph& Graph::operator*=(int n){
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)
@@ -241,7 +244,7 @@ namespace ariel{
         }
 
         Graph operator*(int n, Graph& other){
-            std::vector<std::vector<int>> nG(other.getN(), std::vector<int>(other.getN(), 0));
+            std::vector<std::vector<int>> nG =other.getGraph();
             for (size_t i = 0; i < other.getN(); i++)
             {
                 for (size_t j = 0; j < other.getN(); j++)
@@ -256,7 +259,7 @@ namespace ariel{
         }
 
         Graph operator*( Graph& other, int n){
-            std::vector<std::vector<int>> nG(other.getN(), std::vector<int>(other.getN(), 0));
+            std::vector<std::vector<int>> nG =other.getGraph();
             for (size_t i = 0; i < other.getN(); i++)
             {
                 for (size_t j = 0; j < other.getN(); j++)
@@ -407,7 +410,10 @@ namespace ariel{
         }
 
         Graph& Graph::operator/=(int n){
-            std::vector<std::vector<int>> nG(this->getN(), std::vector<int>(this->getN(), 0));
+            if(n == 0){
+                throw std::invalid_argument("Can't divide by 0");
+            }
+            std::vector<std::vector<int>> nG =this->getGraph();
             for (size_t i = 0; i < this->getN(); i++)
             {
                 for (size_t j = 0; j < this->getN(); j++)

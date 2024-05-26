@@ -24,6 +24,65 @@ TEST_CASE("Test graph addition")
         {2, 0, 3},
         {1, 3, 0}};
     CHECK(g3.printGraph() == "[0, 2, 1]\n[2, 0, 3]\n[1, 3, 0]\n");
+    vector<vector<int>> graph2 = {
+        {0, 1, 0, 0, 1},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {1, 0, 0, 1, 0}};
+    ariel::Graph g4;
+    g4.loadGraph(graph2);
+    CHECK_THROWS(g1 + g4);
+    vector<vector<int>> graph3 = {
+        {0,0,0},
+        {0,0,0},
+        {0,0,0}};
+    ariel::Graph g5;
+    g5.loadGraph(graph3);
+    g5+=g1;
+    CHECK(g5.printGraph() == g1.printGraph());
+    g1 = +g1;
+    CHECK(g5.printGraph() == g1.printGraph());
+
+}
+TEST_CASE("Test graph subtraction")
+{
+    ariel::Graph g1;
+    vector<vector<int>> graph = {
+        {0, 1, 0},
+        {1, 0, 1},
+        {0, 1, 0}};
+    g1.loadGraph(graph);
+    ariel::Graph g2;
+    vector<vector<int>> weightedGraph = {
+        {0, 1, 1},
+        {1, 0, 2},
+        {1, 2, 0}};
+    g2.loadGraph(weightedGraph);
+    ariel::Graph g3 = g2 - g1;
+    vector<vector<int>> expectedGraph = {
+        {0, 0, 1},
+        {0, 0, 1},
+        {1, 1, 0}};
+    CHECK(g3.printGraph() == "[0, 0, 1]\n[0, 0, 1]\n[1, 1, 0]\n");
+    vector<vector<int>> graph2 = {
+        {0, 1, 0, 0, 1},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {1, 0, 0, 1, 0}};
+    ariel::Graph g4;
+    g4.loadGraph(graph2);
+    CHECK_THROWS(g1 - g4);
+    vector<vector<int>> graph3 = {
+        {0,0,0},
+        {0,0,0},
+        {0,0,0}};
+    ariel::Graph g5;
+    g5.loadGraph(graph3);
+    g5-=g1;
+    g1 = -g1;
+    CHECK(g5.printGraph() == g1.printGraph());
 }
 
 TEST_CASE("Test graph multiplication")
@@ -46,6 +105,45 @@ TEST_CASE("Test graph multiplication")
         {1, 0, 1},
         {1, 0, 0}};
     CHECK(g4.printGraph() == "[0, 0, 2]\n[1, 0, 1]\n[1, 0, 0]\n");
+    vector<vector<int>> graph3 = {
+        {0,0,0},
+        {0,0,0},
+        {0,0,0}};
+    ariel::Graph g5;
+    g5.loadGraph(graph3);
+    g1*=g5;
+    CHECK(g1.printGraph() == g5.printGraph());
+}
+
+TEST_CASE("division by integer")
+{
+
+
+    ariel::Graph g2;
+    vector<vector<int>> expectedGraph = {
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}};
+    g2.loadGraph(expectedGraph);
+    g2/= 2;
+    CHECK(g2.printGraph() == "[0, 0, 0]\n[0, 0, 0]\n[0, 0, 0]\n");
+    ariel::Graph g3;
+    vector<vector<int>> expectedGraph2 = {
+        {0, 1, 1},
+        {1, 0, 1},
+        {1, 1, 0}};
+    g3.loadGraph(expectedGraph2);
+    CHECK_THROWS(g3/=0);
+    g3/=2;
+    CHECK(g3.printGraph() == "[0, 0, 0]\n[0, 0, 0]\n[0, 0, 0]\n");
+    ariel::Graph g4;
+    vector<vector<int>> expectedGraph3 = {
+        {0, 6, 6},
+        {6, 0, 6},
+        {6, 6, 0}};
+    g4.loadGraph(expectedGraph3);
+    g4/=3;
+    CHECK(g4.printGraph() == "[0, 2, 2]\n[2, 0, 2]\n[2, 2, 0]\n");
 }
 
 TEST_CASE("Invalid operations")
@@ -100,6 +198,7 @@ TEST_CASE("boolen operations")
         {1, 0, 2},
         {1, 2, 0}};
     g2.loadGraph(weightedGraph);
+
     ariel::Graph g3 = g1 + g2;
     ariel::Graph g4 = g1 * g2;
     ariel::Graph g5 = g1 + g2;
@@ -112,6 +211,10 @@ TEST_CASE("boolen operations")
     CHECK(g3 >= g4);
     CHECK(g4 <= g3);
     CHECK((g4>g3) == false);
+    CHECK((g3<g4) == false);
+    CHECK((g4>=g3) == false);
+    CHECK((g3<=g4) == false);
+    CHECK(g3==g3);
 }
 
 TEST_CASE("Test isConnected")
