@@ -117,11 +117,31 @@ namespace ariel{
                 for (size_t j = 0; j < this->getN(); j++)
                 {
                     nG[i][j] = 0;
-                    nG[i][j] = (this->getGraph()[i][j] + 1);
+                    if(this->getGraph()[i][j] != 0){
+                        nG[i][j] = (this->getGraph()[i][j] + 1);
+                    }
                 }
             }
             this->loadGraph(nG);
             return *this;
+        }
+
+        Graph Graph::operator++(int){
+            std::vector<std::vector<int>> nG =this->getGraph();
+            for (size_t i = 0; i < this->getN(); i++)
+            {
+                for (size_t j = 0; j < this->getN(); j++)
+                {
+                    nG[i][j] = 0;
+                    if(this->getGraph()[i][j] != 0){
+                        nG[i][j] = (this->getGraph()[i][j] + 1);
+                    }
+                }
+            }
+            Graph newg;
+            newg.loadGraph(nG);
+            this->loadGraph(nG);
+            return newg;
         }
 
         Graph Graph::operator-(){
@@ -181,11 +201,32 @@ namespace ariel{
                 for (size_t j = 0; j < this->getN(); j++)
                 {
                     nG[i][j] = 0;
-                    nG[i][j] = (this->getGraph()[i][j] - 1);
+                    if(this->getGraph()[i][j] != 0){
+                        nG[i][j] = (this->getGraph()[i][j] - 1);
+                    }
+                    
                 }
             }
             this->loadGraph(nG);
             return *this;
+        }
+
+        Graph Graph::operator--(int){
+            std::vector<std::vector<int>> nG =this->getGraph();
+            for (size_t i = 0; i < this->getN(); i++)
+            {
+                for (size_t j = 0; j < this->getN(); j++)
+                {
+                    nG[i][j] = 0;
+                    if(this->getGraph()[i][j] != 0){
+                        nG[i][j] = (this->getGraph()[i][j] - 1);
+                    }
+                }
+            }
+            Graph newg;
+            newg.loadGraph(nG);
+            this->loadGraph(nG);
+            return newg;
         }
 
         Graph Graph::operator*( Graph& other){

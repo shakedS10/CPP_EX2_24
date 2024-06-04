@@ -16,6 +16,7 @@ struct ReporterCounter : public ConsoleReporter
         if (run_stats.numAsserts >= MIN_TESTS)
         {
             return_code = 0;
+            std::cout << run_stats.numAsserts << " tests passed!" << std::endl;
         }
         else
         {

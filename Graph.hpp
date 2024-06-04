@@ -33,10 +33,12 @@ namespace ariel {
         Graph& operator+=( Graph& other);
         Graph operator+();
         Graph& operator++();
+        Graph operator++(int);
         Graph operator-();
         Graph& operator-=( Graph& other);
         Graph operator-(  Graph& other);
         Graph& operator--( );
+        Graph operator--(int);
         Graph operator*( Graph& other);
         Graph& operator*=( Graph& other);
         Graph& operator*=(int n);

@@ -51,6 +51,9 @@ int main()
         {1, 0, 0, 1, 0}};
     ariel::Graph g5;
     g5.loadGraph(graph2); // Load the graph to the object.
+    g5++; // Increment all the values in the matrix by 1.
+    ++g5; // Increment all the values in the matrix by 1.
+    cout<<g5; // Should print the matrix of the graph: [1, 2, 1, 1, 2], [2, 1, 2, 1, 1], [1, 2, 1, 2, 1], [1, 1, 2, 1, 2], [2, 1, 1, 2, 1]
     try
     {
         ariel::Graph g6 = g5 * g1; // Multiply the two graphs together.
@@ -59,4 +62,5 @@ int main()
     {
         cout << e.what() << endl; // Should print "The number of columns in the first matrix must be equal to the number of rows in the second matrix."
     }
+    
 }

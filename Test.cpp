@@ -44,6 +44,14 @@ TEST_CASE("Test graph addition")
     CHECK(g5.printGraph() == g1.printGraph());
     g1 = +g1;
     CHECK(g5.printGraph() == g1.printGraph());
+    ariel::Graph g6;
+    g6.loadGraph(graph3);
+    ++g6;
+    CHECK(g6.printGraph() == g6.printGraph());
+    ++g4;
+    CHECK(g4.printGraph() =="[0, 2, 0, 0, 2]\n[2, 0, 2, 0, 0]\n[0, 2, 0, 2, 0]\n[0, 0, 2, 0, 2]\n[2, 0, 0, 2, 0]\n");
+    g4++;
+    CHECK(g4.printGraph()== "[0, 3, 0, 0, 3]\n[3, 0, 3, 0, 0]\n[0, 3, 0, 3, 0]\n[0, 0, 3, 0, 3]\n[3, 0, 0, 3, 0]\n");
 
 }
 TEST_CASE("Test graph subtraction")
@@ -84,6 +92,13 @@ TEST_CASE("Test graph subtraction")
     g5-=g1;
     g1 = -g1;
     CHECK(g5.printGraph() == g1.printGraph());
+    g4--;
+    CHECK(g4.printGraph() == "[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n");
+    ariel::Graph g6;
+    g6.loadGraph(graph2);
+    --g6;
+    CHECK(g4.printGraph() == "[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]\n");
+
 }
 
 TEST_CASE("Test graph multiplication")
