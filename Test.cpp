@@ -312,7 +312,7 @@ TEST_CASE("Test shortestPath")
         {0, 1, 0, 0}, 
         {0, 2, 0, 0}};
     g.loadGraph(graph4);
-    CHECK(ariel::Algorithms::shortestPath(g, 0, 3) == "Negative cycle detected");
+    CHECK(ariel::Algorithms::shortestPath(g, 0, 3) == "Negative cycle detected 3->1->0");
     
     vector<vector<int>> graph5 = {
         {0, 1, 0, 0, 0},

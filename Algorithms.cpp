@@ -80,7 +80,15 @@ using namespace ariel;
                 {
                     if (g.getGraph()[u][v] != 0 && dist[u] != INT_MAX && dist[u] + g.getGraph()[u][v] < dist[v])
                     {
-                        return "Negative cycle detected";
+                        string negcycle = std::to_string(u)+"->"+std::to_string(v);
+                        size_t temp = u;
+                        while (parent[temp] != v)
+                        {
+                            negcycle = std::to_string(parent[temp]) + "->" + negcycle;
+                            temp = (size_t)parent[temp];
+                        }
+                        cout << negcycle << endl; 
+                        return "Negative cycle detected " + negcycle;
                         
                     }
                 }
@@ -260,44 +268,14 @@ using namespace ariel;
         std::string Algorithms::negativeCycle(Graph g){
             // Run bellman ford algorithm from 0 just to check if after n-1 relaxes the next one doesn't have impact
             // If there is then there is a negative cycle return the cycle
-            size_t n = g.getN();
-            vector<int> dist(n, INT_MAX);
-            dist[0] = 0;
-            vector<int> parent(n, -1);        
-            for (size_t i = 0; i < n - 1; i++)
-            {
-                for (size_t u = 0; u < n; u++)
-                {
-                    for (size_t v = 0; v < n; v++)
-                    {
-                        if (g.getGraph()[u][v] != 0 && dist[u] != INT_MAX && dist[u] + g.getGraph()[u][v] < dist[v]) //relaxation
-                        {
-                            dist[v] = dist[u] + g.getGraph()[u][v];
-                            parent[v] = u;
-                        }
-                    }
-                }
+            string negcycle = "";
+            negcycle = Algorithms::shortestPath(g, 0, g.getN()-1);
+            if(negcycle.find("Negative cycle detected") != string::npos){
+                return negcycle.substr(24);
             }
-            for (size_t u = 0; u < n; u++)
-            {
-                for (size_t v = 0; v < n; v++)
-                {
-                    if (g.getGraph()[u][v] != 0 && dist[u] != INT_MAX && dist[u] + g.getGraph()[u][v] < dist[v])
-                    {
-                        std::cout << "Negative cycle detected" << std::endl;
-                        string negcycle = std::to_string(u)+"->"+std::to_string(v);
-                        size_t temp = u;
-                        while (parent[temp] != v)
-                        {
-                            negcycle = std::to_string(parent[temp]) + "->" + negcycle;
-                            temp = (size_t)parent[temp];
-                        }
-                        cout << negcycle << endl;
-                        return negcycle;
-                    }
-                }
+            else{
+                return "-1";
             }
-            return "-1";
 
         }
         
