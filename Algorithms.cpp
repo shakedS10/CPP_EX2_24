@@ -114,8 +114,8 @@ using namespace ariel;
        bool Algorithms::isContainsCycle(Graph g) {
         //different for directed and undirected
         // for directed run dfs and if there is a back edge return true
-        // for undirected run dfs but there is no need to check 3 colors just check if the parent is not the current vertex
-        // the reason is because if the dfs finished on a vertex then it go colored black and already checked its entire component
+        // for undirected run dfs but always check if it's not the parent if so just continue as he provides no value here as we dont
+        // want to check the edge that we came from
         size_t n = g.getN();
         vector<int> color(n, 0);
         vector<size_t> parent(n,(size_t)-1);
